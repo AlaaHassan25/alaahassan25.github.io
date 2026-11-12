@@ -496,6 +496,8 @@ const store={get(k){try{return localStorage.getItem(k)}catch(e){return null}},se
 /* ---------- data ---------- */
 const projects=[
  {t:"Markly",a:"ماركلي",l:"Social Analytics Dashboard · Osolutions",la:"لوحة تحليلات سوشيال ميديا · Osolutions",img:"images/markly-compare.png",kase:"markly",f:1},
+ {t:"IHS",a:"IHS",l:"Hospitality Supplies Website",la:"موقع مستلزمات الضيافة",img:"images/ihs-home.png",top:1,kase:"ihs",f:1},
+ {t:"Kasvol",a:"كاسفول",l:"Corporate Website",la:"موقع شركة",img:"images/kasvol-home.png",top:1,kase:"kasvol",f:1},
  {t:"Emdad X",a:"إمداد إكس",l:"B2B Food Supply · Store & Landing",la:"توريد أغذية B2B · متجر وصفحة هبوط",img:"images/emdad-store.png",kase:"emdad",f:1},
  {t:"Creator Support",a:"كريتور سبورت",l:"Mobile App · Case Study",la:"تطبيق موبايل · دراسة حالة",id:"246638569/Creator-Support-_Mobile-App_Case-Study",n:1},
  {t:"MECS Logistics",a:"MECS اللوجستية",l:"Landing Page · Case Study",la:"صفحة هبوط · دراسة حالة",id:"239536907/MECS-Logistics-Servies-Landing-Page-Case-Study",n:1},
@@ -579,6 +581,23 @@ CASES.emdad={
    {src:"images/emdad-store.png",en:"<b>Store home</b> · search-first hero with a category rail for fast wholesale ordering.",ar:"<b>الصفحة الرئيسية للمتجر</b> · بحث في الواجهة وقائمة فئات جانبية للطلب بالجملة بسرعة."},
    {src:"images/emdad-landing.png",en:"<b>Landing page</b> · value proposition, sectors served, partners, product categories and account managers.",ar:"<b>صفحة الهبوط</b> · القيمة المقدمة، والقطاعات، والشركاء، وفئات المنتجات، ومديري الحسابات."}
   ]};
+CASES.ihs={
+  title:{en:'IHS <span class="serif">hospitality</span>',ar:'IHS <span class="serif">للضيافة</span>'},
+  meta:{en:["Website","RTL","Saudi Arabia"],ar:["موقع","RTL","السعودية"]},
+  lead:{en:"An Arabic-first website for a <b>hotel amenities and hospitality supplies</b> brand: product catalogue by category, custom hotel solutions, projects timeline, client reviews and a consultation booking form.",
+        ar:"موقع عربي أولاً لعلامة <b>مستلزمات فنادق وضيافة</b>: كتالوج منتجات حسب الفئة، وحلول فندقية مخصصة، وخط زمني للمشاريع، وآراء العملاء، وفورم لحجز استشارة."},
+  tags:{en:["Website","Product catalogue","RTL / Arabic-first","Figma"],ar:["موقع","كتالوج منتجات","عربي أولاً / RTL","فيجما"]},
+  shots:[
+   {src:"images/ihs-home.png",en:"<b>Home page</b> · hero, consultation form, products, custom solutions and reviews.",ar:"<b>الصفحة الرئيسية</b> · الهيرو، وفورم الاستشارة، والمنتجات، والحلول المخصصة، والآراء."},
+   {src:"images/ihs-product.png",en:"<b>Product page</b> · product details and related items.",ar:"<b>صفحة المنتج</b> · تفاصيل المنتج ومنتجات مشابهة."}]};
+CASES.kasvol={
+  title:{en:'Kasvol <span class="serif">website</span>',ar:'كاسفول <span class="serif">الموقع</span>'},
+  meta:{en:["Corporate website","Design system"],ar:["موقع شركة","نظام تصميم"]},
+  lead:{en:"A corporate website with a <b>dedicated design system</b> (fonts, colors and components): home, why us, products and product details, projects, articles, certifications and contact pages.",
+        ar:"موقع شركة بـ<b>نظام تصميم خاص</b> (خطوط وألوان ومكوّنات): الرئيسية، ولماذا نحن، والمنتجات وتفاصيلها، والمشاريع، والمقالات، والشهادات، وتواصل معنا."},
+  tags:{en:["Website","Design system","Figma"],ar:["موقع","نظام تصميم","فيجما"]},
+  shots:[
+   {src:"images/kasvol-home.png",en:"<b>Final home page</b>.",ar:"<b>الصفحة الرئيسية النهائية</b>."}]};
 let lastFocus=null;
 function openCase(k){
   const c=CASES[k]; if(!c) return; const L=lang==="ar"?"ar":"en";
@@ -609,7 +628,7 @@ function renderCards(){
   $("#wtotal").textContent="/"+projects.length;
   $("#cards").innerHTML=projects.map((p,i)=>`
    <a class="hcard" ${p.kase?`href="#${p.kase}" data-case="${p.kase}"`:`href="https://www.behance.net/gallery/${p.id}" target="_blank" rel="noopener"`} data-cursor>
-     <div class="hc-img">${p.f?`<span class="new" style="background:var(--violet);color:#fff">${lang==="ar"?"مميز ✦":"Featured ✦"}</span>`:p.n?`<span class="new">${lang==="ar"?"جديد":"New"}</span>`:""}<img decoding="async" src="${p.img||`images/${p.id.split("/")[0]}.webp`}" alt="${p.t}, ${p.l}"></div>
+     <div class="hc-img">${p.f?`<span class="new" style="background:var(--violet);color:#fff">${lang==="ar"?"مميز ✦":"Featured ✦"}</span>`:p.n?`<span class="new">${lang==="ar"?"جديد":"New"}</span>`:""}<img decoding="async" ${p.top?'style="object-position:top"':''} src="${p.img||`images/${p.id.split("/")[0]}.webp`}" alt="${p.t}, ${p.l}"></div>
      <div class="hc-meta"><span class="n">${String(i+1).padStart(2,"0")}</span><h3>${lang==="ar"?p.a:p.t}</h3><span class="t">${lang==="ar"?p.la:p.l}</span></div>
    </a>`).join("");
 }

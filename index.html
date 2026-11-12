@@ -250,6 +250,32 @@ html[lang="ar"] .xcard h3 em{font-family:var(--ar);font-weight:300;font-style:no
 @media (max-width:800px){.xcard{grid-template-columns:1fr;gap:16px;min-height:0;top:calc(76px + var(--i) * 12px)}}
 @media (max-width:600px){.xcard .v{font-size:72px}}
 
+/* case study overlay */
+.case{position:fixed;inset:0;z-index:95;background:rgba(8,8,10,.74);backdrop-filter:blur(12px);overflow:auto;overscroll-behavior:contain;padding:max(4vh,16px) max(16px,env(safe-area-inset-right,0px)) 6vh max(16px,env(safe-area-inset-left,0px))}
+.case[hidden]{display:none}
+.case-in{position:relative;width:min(1180px,100%);margin:0 auto;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:28px;padding:clamp(22px,4vw,52px);animation:caseIn .6s cubic-bezier(.2,.8,.2,1) both}
+@keyframes caseIn{from{transform:translateY(40px) scale(.98);opacity:0}to{transform:none;opacity:1}}
+.case-x{position:sticky;top:0;float:right;margin:-8px -8px 0 0;width:46px;height:46px;border-radius:50%;background:var(--ink);color:var(--bg);font-size:20px;z-index:2;display:grid;place-items:center;transition:background .2s}
+html[dir="rtl"] .case-x{float:left;margin:-8px 0 0 -8px}
+.case-x:hover{background:var(--coral);color:#fff}
+.case-meta{display:flex;flex-wrap:wrap;gap:8px;color:var(--muted)}
+.case-meta span{padding:6px 12px;border:1px solid var(--line);border-radius:999px}
+.case h2{margin-top:22px}
+.case h2 .serif{color:var(--violet)}
+.case-lead{margin-top:22px;font-size:clamp(17px,1.6vw,20px);max-width:760px;color:var(--muted)}
+.case-lead b{color:var(--ink);font-weight:600}
+.case-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.case-tags span{font-size:14px;padding:6px 14px;border-radius:999px;background:var(--surface-2)}
+.case-shots{display:grid;gap:44px;margin-top:48px}
+.case-shots figure{display:grid;gap:12px}
+.shot-frame{border-radius:16px;overflow:hidden;border:1px solid var(--line);background:var(--bg)}
+.shot-bar{display:flex;gap:6px;padding:10px 14px;border-bottom:1px solid var(--line)}
+.shot-bar i{width:10px;height:10px;border-radius:50%;background:var(--line)}
+.shot-bar i:nth-child(1){background:var(--coral)}.shot-bar i:nth-child(2){background:var(--sun)}.shot-bar i:nth-child(3){background:var(--mint)}
+.shot-frame img{width:100%;height:auto;display:block}
+.case-shots figcaption{color:var(--muted);font-size:15px}
+.case-shots figcaption b{color:var(--ink);font-weight:600}
+
 /* toolbox rows */
 .tools-list{margin-top:60px;border-top:1px solid var(--line)}
 .trow{position:relative;display:grid;grid-template-columns:70px minmax(0,1fr) auto;gap:20px;align-items:center;padding:26px 12px;border-bottom:1px solid var(--line);overflow:hidden;isolation:isolate;transition:color .4s}
@@ -376,7 +402,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       <div class="eyebrow mono" style="--c:var(--violet)" data-i18n="workEye">Selected work</div>
       <h2><span data-i18n="workT1">Frames I’m</span><br><span class="serif" style="color:var(--violet)" data-i18n="workT2">proud of</span></h2>
       <p data-i18n="workP">Mobile apps, platforms and landing pages for clients in Egypt and the Gulf. Each one opens the full case on Behance.</p>
-      <div class="counter"><span id="wcount">01</span><small>/12</small></div>
+      <div class="counter"><span id="wcount">01</span><small id="wtotal">/14</small></div>
       <div class="hint mono"><span data-i18n="hint">Keep scrolling</span> <svg class="flip" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
     </div>
     <div id="cards" style="display:contents"></div>
@@ -442,6 +468,17 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 </main>
 <footer><div class="wrap"><span data-i18n="f1">© 2026 Alaa Hassan. Designed and coded by me.</span><span class="mono" data-i18n="f2">Made in Cairo with Figma, code &amp; coffee</span></div></footer>
 
+<div class="case" id="case" hidden role="dialog" aria-modal="true" aria-labelledby="caseTitle" data-lenis-prevent>
+  <div class="case-in">
+    <button class="case-x" id="caseX" aria-label="Close">✕</button>
+    <div class="case-meta mono" id="caseMeta"></div>
+    <h2 id="caseTitle"></h2>
+    <p class="case-lead" id="caseLead"></p>
+    <div class="case-tags" id="caseTags"></div>
+    <div class="case-shots" id="caseShots"></div>
+  </div>
+</div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
@@ -455,6 +492,8 @@ const store={get(k){try{return localStorage.getItem(k)}catch(e){return null}},se
 
 /* ---------- data ---------- */
 const projects=[
+ {t:"Markly",a:"ماركلي",l:"Social Analytics Dashboard · Osolutions",la:"لوحة تحليلات سوشيال ميديا · Osolutions",img:"images/markly-compare.png",kase:"markly",f:1},
+ {t:"Emdad X",a:"إمداد إكس",l:"B2B Food Supply · Store & Landing",la:"توريد أغذية B2B · متجر وصفحة هبوط",img:"images/emdad-store.png",kase:"emdad",f:1},
  {t:"Creator Support",a:"كريتور سبورت",l:"Mobile App · Case Study",la:"تطبيق موبايل · دراسة حالة",id:"246638569/Creator-Support-_Mobile-App_Case-Study",n:1},
  {t:"MECS Logistics",a:"MECS اللوجستية",l:"Landing Page · Case Study",la:"صفحة هبوط · دراسة حالة",id:"239536907/MECS-Logistics-Servies-Landing-Page-Case-Study",n:1},
  {t:"Fabulous",a:"فابيولس",l:"Mobile App",la:"تطبيق موبايل",id:"220712211/Fabulous"},
@@ -514,10 +553,60 @@ function splitWords(el){
   });};
   walk(el);
 }
+const CASES={
+ markly:{
+  title:{en:'Markly <span class="serif">analytics</span>',ar:'ماركلي <span class="serif">للتحليلات</span>'},
+  meta:{en:["Osolutions","2025 — 2026","Web app · RTL"],ar:["Osolutions","٢٠٢٥ — ٢٠٢٦","تطبيق ويب · RTL"]},
+  lead:{en:"An <b>Arabic-first social media analytics</b> workspace that brings Facebook, Instagram, LinkedIn, Threads, TikTok and X into one view. I designed the analytics dashboard end to end: <b>platform comparison</b>, audience growth, posting-time heatmaps, engagement breakdowns and geographic insights, plus the Markly design system and settings module.",
+        ar:"مساحة <b>تحليلات سوشيال ميديا عربية أولاً</b> بتجمع فيسبوك وإنستجرام ولينكدإن وثريدز وتيك توك وإكس في مكان واحد. صممت لوحة التحليلات من الأول للآخر: <b>مقارنة المنصات</b>، ونمو الجمهور، وخريطة أوقات النشر، وتفاصيل التفاعل، والتوزيع الجغرافي، بالإضافة لنظام تصميم Markly وصفحات الإعدادات."},
+  tags:{en:["Dashboard design","Data visualization","RTL / Arabic-first","Design system","Figma"],ar:["تصميم لوحات تحكم","عرض البيانات","عربي أولاً / RTL","نظام تصميم","فيجما"]},
+  shots:[
+   {src:"images/markly-compare.png",en:"<b>Overview</b> · all platforms at a glance, with KPI cards and a multi-platform follower trend.",ar:"<b>نظرة عامة</b> · كل المنصات في شاشة واحدة، مع مؤشرات الأداء ومنحنى المتابعين لكل منصة."},
+   {src:"images/markly-overview-all.png",en:"<b>Full analytics page</b> · posting-time heatmap, engagement over time, reach vs. impressions, top posts and audience geography.",ar:"<b>صفحة التحليلات كاملة</b> · خريطة أوقات النشر، والتفاعل بمرور الوقت، والوصول مقابل الانطباعات، وأفضل المنشورات، وجغرافيا الجمهور."},
+   {src:"images/markly-single.png",en:"<b>Single platform</b> · a deep dive into one channel's audience and content performance.",ar:"<b>منصة واحدة</b> · تفاصيل جمهور وأداء محتوى قناة واحدة."}
+  ]}
+};
+CASES.emdad={
+  title:{en:'Emdad <span class="serif">X</span>',ar:'إمداد <span class="serif">إكس</span>'},
+  meta:{en:["B2B e-commerce","Web · RTL","Saudi Arabia"],ar:["تجارة إلكترونية B2B","ويب · RTL","السعودية"]},
+  lead:{en:"A <b>B2B food &amp; beverage supply platform</b> for restaurants, cafés, hotels and bakeries across Saudi Arabia. I designed the <b>Arabic-first store</b> with category browsing and search, and the marketing landing page that explains the service, sectors, partners and success stories.",
+        ar:"<b>منصة توريد أغذية ومشروبات B2B</b> للمطاعم والمقاهي والفنادق والمخابز في السعودية. صممت <b>المتجر بالعربي أولاً</b> بتصفح الفئات والبحث، وصفحة الهبوط التسويقية اللي بتشرح الخدمة والقطاعات والشركاء وقصص النجاح."},
+  tags:{en:["E-commerce","Landing page","RTL / Arabic-first","Figma"],ar:["تجارة إلكترونية","صفحة هبوط","عربي أولاً / RTL","فيجما"]},
+  shots:[
+   {src:"images/emdad-store.png",en:"<b>Store home</b> · search-first hero with a category rail for fast wholesale ordering.",ar:"<b>الصفحة الرئيسية للمتجر</b> · بحث في الواجهة وقائمة فئات جانبية للطلب بالجملة بسرعة."},
+   {src:"images/emdad-landing.png",en:"<b>Landing page</b> · value proposition, sectors served, partners, product categories and account managers.",ar:"<b>صفحة الهبوط</b> · القيمة المقدمة، والقطاعات، والشركاء، وفئات المنتجات، ومديري الحسابات."}
+  ]};
+let lastFocus=null;
+function openCase(k){
+  const c=CASES[k]; if(!c) return; const L=lang==="ar"?"ar":"en";
+  $("#caseTitle").innerHTML=c.title[L];
+  $("#caseMeta").innerHTML=c.meta[L].map(m=>`<span>${m}</span>`).join("");
+  $("#caseLead").innerHTML=c.lead[L];
+  $("#caseTags").innerHTML=c.tags[L].map(m=>`<span>${m}</span>`).join("");
+  $("#caseShots").innerHTML=c.shots.map(s=>`<figure><div class="shot-frame"><div class="shot-bar"><i></i><i></i><i></i></div><img loading="lazy" src="${s.src}" alt=""></div><figcaption>${s[L]}</figcaption></figure>`).join("");
+  lastFocus=document.activeElement;
+  const box=$("#case"); box.hidden=false; box.scrollTop=0;
+  if(typeof lenis!=="undefined" && lenis) lenis.stop();
+  document.documentElement.style.overflow="hidden";
+  $("#caseX").focus();
+}
+function closeCase(){
+  const box=$("#case"); if(box.hidden) return; box.hidden=true;
+  if(typeof lenis!=="undefined" && lenis) lenis.start();
+  document.documentElement.style.overflow="";
+  lastFocus && lastFocus.focus && lastFocus.focus();
+}
+document.addEventListener("click",e=>{
+  const a=e.target.closest("[data-case]"); if(a){ e.preventDefault(); openCase(a.dataset.case); return; }
+  if(e.target.id==="case" || e.target.closest("#caseX")) closeCase();
+});
+document.addEventListener("keydown",e=>{ if(e.key==="Escape") closeCase(); });
+
 function renderCards(){
+  $("#wtotal").textContent="/"+projects.length;
   $("#cards").innerHTML=projects.map((p,i)=>`
-   <a class="hcard" href="https://www.behance.net/gallery/${p.id}" target="_blank" rel="noopener" data-cursor>
-     <div class="hc-img">${p.n?`<span class="new">${lang==="ar"?"جديد":"New"}</span>`:""}<img decoding="async" src="images/${p.id.split("/")[0]}.webp" alt="${p.t}, ${p.l}"></div>
+   <a class="hcard" ${p.kase?`href="#${p.kase}" data-case="${p.kase}"`:`href="https://www.behance.net/gallery/${p.id}" target="_blank" rel="noopener"`} data-cursor>
+     <div class="hc-img">${p.f?`<span class="new" style="background:var(--violet);color:#fff">${lang==="ar"?"مميز ✦":"Featured ✦"}</span>`:p.n?`<span class="new">${lang==="ar"?"جديد":"New"}</span>`:""}<img decoding="async" src="${p.img||`images/${p.id.split("/")[0]}.webp`}" alt="${p.t}, ${p.l}"></div>
      <div class="hc-meta"><span class="n">${String(i+1).padStart(2,"0")}</span><h3>${lang==="ar"?p.a:p.t}</h3><span class="t">${lang==="ar"?p.la:p.l}</span></div>
    </a>`).join("");
 }
@@ -700,7 +789,7 @@ function buildScroll(){
       const track=$("#track"), rtl=root.dir==="rtl";
       const dist=()=>Math.max(0,track.scrollWidth-innerWidth);
       const tw=gsap.to(track,{x:()=>(rtl?1:-1)*dist(),ease:"none",scrollTrigger:{trigger:"#work",pin:true,scrub:1,start:"top top",end:()=>"+="+dist(),invalidateOnRefresh:true,
-        onUpdate:s=>{ $("#wcount").textContent=String(Math.min(12,Math.max(1,Math.round(s.progress*11)+1))).padStart(2,"0"); }}});
+        onUpdate:s=>{ const N=projects.length; $("#wcount").textContent=String(Math.min(N,Math.max(1,Math.round(s.progress*(N-1))+1))).padStart(2,"0"); }}});
       $$(".hcard").forEach(card=>{
         const img=card.querySelector("img");
         gsap.fromTo(img,{xPercent:rtl?6:-6},{xPercent:rtl?-6:6,ease:"none",scrollTrigger:{trigger:card,containerAnimation:tw,start:"left right",end:"right left",scrub:true}});

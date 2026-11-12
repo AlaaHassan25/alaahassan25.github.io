@@ -496,6 +496,7 @@ const store={get(k){try{return localStorage.getItem(k)}catch(e){return null}},se
 /* ---------- data ---------- */
 const projects=[
  {t:"Markly",a:"ماركلي",l:"Social Analytics Dashboard · Osolutions",la:"لوحة تحليلات سوشيال ميديا · Osolutions",img:"images/markly-compare.png",kase:"markly",f:1},
+ {t:"Growth In · Client App",a:"Growth In · تطبيق العميل",l:"Mobile App · Osolutions",la:"تطبيق موبايل · Osolutions",img:"images/gi-cover.png",kase:"growthin",f:1},
  {t:"IHS",a:"IHS",l:"Hospitality Supplies Website",la:"موقع مستلزمات الضيافة",img:"images/ihs-home.png",top:1,kase:"ihs",f:1},
  {t:"Kasvol",a:"كاسفول",l:"Corporate Website",la:"موقع شركة",img:"images/kasvol-home.png",top:1,kase:"kasvol",f:1},
  {t:"Emdad X",a:"إمداد إكس",l:"B2B Food Supply · Store & Landing",la:"توريد أغذية B2B · متجر وصفحة هبوط",img:"images/emdad-store.png",kase:"emdad",f:1},
@@ -590,6 +591,15 @@ CASES.ihs={
   shots:[
    {src:"images/ihs-home.png",en:"<b>Home page</b> · hero, consultation form, products, custom solutions and reviews.",ar:"<b>الصفحة الرئيسية</b> · الهيرو، وفورم الاستشارة، والمنتجات، والحلول المخصصة، والآراء."},
    {src:"images/ihs-product.png",en:"<b>Product page</b> · product details and related items.",ar:"<b>صفحة المنتج</b> · تفاصيل المنتج ومنتجات مشابهة."}]};
+CASES.growthin={
+  title:{en:'Growth In <span class="serif">client app</span>',ar:'Growth In <span class="serif">تطبيق العميل</span>'},
+  meta:{en:["Osolutions","Mobile app · RTL","Tasks & chat"],ar:["Osolutions","تطبيق موبايل · RTL","مهام ومحادثات"]},
+  lead:{en:"The client-facing mobile app for <b>Growth In</b>, a business-development and task-automation platform. Arabic-first flows for <b>tasks</b> (list, board and calendar views, details, comments, threads, filters, attachments) and <b>team chat</b> (channels, DMs, threads, scheduled messages and search), mapped feature by feature from the product backlog.",
+        ar:"تطبيق الموبايل الخاص بعملاء <b>Growth In</b>، منصة تطوير الأعمال وأتمتة المهام. رحلات عربية أولاً لـ<b>المهام</b> (عرض قائمة ولوحة وتقويم، والتفاصيل، والتعليقات، والردود، والفلاتر، والمرفقات) و<b>محادثات الفريق</b> (قنوات، ورسائل خاصة، وردود، ورسائل مجدولة، وبحث)، متصممة ميزة ميزة من الـ backlog."},
+  tags:{en:["Mobile app","Task management","Chat","RTL / Arabic-first","Design system"],ar:["تطبيق موبايل","إدارة مهام","محادثات","عربي أولاً / RTL","نظام تصميم"]},
+  shots:[
+   {src:"images/gi-task.png",en:"<b>Task details</b> · details, description, comments and activity log tabs.",ar:"<b>تفاصيل المهمة</b> · التفاصيل والوصف والتعليقات وسجل النشاط."},
+   {src:"images/gi-views.png",en:"<b>List, board and calendar views</b> · one task list, three ways to see it.",ar:"<b>عرض القائمة واللوحة والتقويم</b> · نفس المهام بثلاث طرق عرض."}]};
 CASES.kasvol={
   title:{en:'Kasvol <span class="serif">website</span>',ar:'كاسفول <span class="serif">الموقع</span>'},
   meta:{en:["Corporate website","Design system"],ar:["موقع شركة","نظام تصميم"]},
@@ -597,7 +607,9 @@ CASES.kasvol={
         ar:"موقع شركة بـ<b>نظام تصميم خاص</b> (خطوط وألوان ومكوّنات): الرئيسية، ولماذا نحن، والمنتجات وتفاصيلها، والمشاريع، والمقالات، والشهادات، وتواصل معنا."},
   tags:{en:["Website","Design system","Figma"],ar:["موقع","نظام تصميم","فيجما"]},
   shots:[
-   {src:"images/kasvol-home.png",en:"<b>Final home page</b>.",ar:"<b>الصفحة الرئيسية النهائية</b>."}]};
+   {src:"images/kasvol-home.png",en:"<b>Home page</b> · final version.",ar:"<b>الصفحة الرئيسية</b> · النسخة النهائية."},
+   {src:"images/kasvol-product.png",en:"<b>Products</b> · catalogue page.",ar:"<b>المنتجات</b> · صفحة الكتالوج."},
+   {src:"images/kasvol-project.png",en:"<b>Project details</b> · case page for a delivered project.",ar:"<b>تفاصيل المشروع</b> · صفحة مشروع منفّذ."}]};
 let lastFocus=null;
 function openCase(k){
   const c=CASES[k]; if(!c) return; const L=lang==="ar"?"ar":"en";

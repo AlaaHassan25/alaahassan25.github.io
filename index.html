@@ -231,29 +231,24 @@ html[lang="ar"] .hc-meta h3{font-family:var(--ar);letter-spacing:0}
 html[lang="ar"] .hend{font-family:var(--ar);letter-spacing:0}
 @media (max-width:640px){.htrack{grid-template-columns:1fr}}
 
-/* experience — list */
-.xlist{margin-top:60px;border-top:1px solid var(--line)}
-.xrow{position:relative;display:grid;grid-template-columns:minmax(0,230px) minmax(0,1fr);gap:16px 40px;padding:34px 16px;border-bottom:1px solid var(--line);isolation:isolate;transition:color .4s}
-.xrow::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--c);transform:scaleY(0);transform-origin:bottom;transition:transform .55s cubic-bezier(.7,0,.2,1)}
-.xrow:hover{color:#111}
-.xrow:hover::before{transform:scaleY(1)}
-.xrow .xd{display:flex;flex-direction:column;gap:10px;align-items:flex-start;color:var(--muted);padding-top:8px;transition:color .4s}
-.xrow:hover .xd{color:#111}
-.xrow .xd > span:first-child{display:inline-flex;align-items:center;gap:10px}
-.xrow .xd > span:first-child::before{content:"";width:10px;height:10px;border-radius:3px;rotate:45deg;background:var(--c);flex:none;transition:background .4s}
-.xrow:hover .xd > span:first-child::before{background:#111}
-.xrow .xd b{display:inline-flex;align-items:center;gap:6px;font:600 11px var(--mono);text-transform:uppercase;padding:5px 10px;border-radius:999px;background:var(--c);color:#111}
-.xrow:hover .xd b{background:#111;color:#fff}
-.xrow h3{font:700 clamp(26px,3vw,42px)/1.08 var(--display);letter-spacing:-.035em}
-html[lang="ar"] .xrow h3{font-family:var(--ar);letter-spacing:0;line-height:1.4}
-.xrow h3 em{font-family:var(--serif);font-weight:400;font-size:.85em;color:var(--muted);letter-spacing:-.01em;transition:color .4s}
-.xrow:hover h3 em{color:#111}
-html[lang="ar"] .xrow h3 em{font-family:var(--ar);font-weight:300;font-style:normal}
-.xrow p{margin-top:12px;font-size:17px;max-width:680px;color:var(--muted);transition:color .4s}
-.xrow:hover p{color:#111}
-.xrow ul{list-style:none;display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
-.xrow li{border:1px solid currentColor;border-radius:999px;padding:5px 12px;font-size:13px;opacity:.75}
-@media (max-width:760px){.xrow{grid-template-columns:1fr;padding:28px 4px}.xrow .xd{flex-direction:row;flex-wrap:wrap;align-items:center;padding:0}}
+/* experience — stacking cards */
+.xstack{display:grid;gap:22px;margin-top:70px}
+.xcard{position:sticky;top:calc(90px + var(--i) * 20px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr);gap:40px;padding:clamp(28px,4vw,56px);border-radius:32px;min-height:420px;transform-origin:50% 0;will-change:transform}
+.xcard .v{font:800 clamp(80px,12vw,180px)/.8 var(--display);letter-spacing:-.06em}
+.xcard .when{font:500 13px var(--mono);margin-top:22px;opacity:.75;text-transform:uppercase;letter-spacing:.04em}
+html[lang="ar"] .xcard .when{font-family:var(--ar);text-transform:none;letter-spacing:0}
+.xcard h3{font:700 clamp(28px,3.4vw,48px)/1.05 var(--display);letter-spacing:-.035em}
+html[lang="ar"] .xcard h3{font-family:var(--ar);letter-spacing:0;line-height:1.35}
+.xcard h3 em{display:block;font-family:var(--serif);font-weight:400;font-size:.8em;opacity:.8;letter-spacing:-.01em}
+html[lang="ar"] .xcard h3 em{font-family:var(--ar);font-weight:300;font-style:normal}
+.xcard p{margin-top:18px;font-size:18px;max-width:620px;opacity:.85}
+.xcard ul{list-style:none;display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.xcard li{border:1.5px solid currentColor;border-radius:999px;padding:6px 14px;font-size:14px;font-weight:600;opacity:.85}
+.x1{background:var(--sky);color:#04212e}.x2{background:var(--coral);color:#2c0a05}.x3{background:var(--violet);color:#fff}
+.x4{background:var(--sun);color:#2a2306}.x5{background:var(--mint);color:#04281a}.x6{background:var(--ink);color:var(--bg)}
+.xtag{display:inline-block;margin-top:14px;background:rgba(0,0,0,.18);padding:5px 10px;border-radius:999px;font:600 11px var(--mono);text-transform:uppercase}
+@media (max-width:800px){.xcard{grid-template-columns:1fr;gap:16px;min-height:0;top:calc(76px + var(--i) * 12px)}}
+@media (max-width:600px){.xcard .v{font-size:72px}}
 
 /* toolbox rows */
 .tools-list{margin-top:60px;border-top:1px solid var(--line)}
@@ -392,24 +387,24 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 <!-- EXPERIENCE -->
 <section id="experience" class="pad">
   <div class="wrap">
-    <div class="eyebrow mono" style="--c:var(--sky)" data-i18n="expEye">Experience</div>
-    <h2><span data-i18n="expT1">Where I’ve</span> <span class="serif" style="color:var(--sky)" data-i18n="expT2">worked</span></h2>
-    <div class="xlist">
-      <article class="xrow" style="--c:var(--sky)"><div class="xd mono"><span data-i18n="d1">May 2026 — Present</span><b data-i18n="cur">● Now</b></div>
-        <div><h3><span data-i18n="r1">Product Designer</span> <em>· Saudi Tracking Company</em></h3><p data-i18n="p1">Leading the full revamp of Nasam, an enterprise Fleet &amp; Asset Management SaaS for Saudi Arabia and the GCC, on web and mobile, Arabic-first.</p>
+    <div class="eyebrow mono" style="--c:var(--sky)" data-i18n="expEye">Experience — version history</div>
+    <h2><span data-i18n="expT1">Every role,</span> <span class="serif" style="color:var(--sky)" data-i18n="expT2">a new release</span></h2>
+    <div class="xstack">
+      <article class="xcard x1" style="--i:0"><div><div class="v">v5</div><div class="when" data-i18n="d1">May 2026 — Present</div><span class="xtag" data-i18n="cur">● Current version</span></div>
+        <div><h3><span data-i18n="r1">Product Designer</span><em>Saudi Tracking Company</em></h3><p data-i18n="p1">Leading the full revamp of Nasam, an enterprise Fleet &amp; Asset Management SaaS for Saudi Arabia and the GCC, on web and mobile, Arabic-first.</p>
         <ul><li data-i18n="t1a">New information architecture</li><li data-i18n="t1b">Nasam Design System</li><li data-i18n="t1c">Reports · Dashboard · Super Admin</li></ul></div></article>
-      <article class="xrow" style="--c:var(--mint)"><div class="xd mono"><span data-i18n="d2">2022 — Present</span><b data-i18n="branch">Part-time</b></div>
-        <div><h3><span data-i18n="r2">Freelance Product Designer</span> <em data-i18n="remote">· Remote</em></h3><p data-i18n="p2">Concepts, user flows, high-fidelity UI and prototypes for clients across industries, delivered as developer-ready Figma files and reusable components.</p></div></article>
-      <article class="xrow" style="--c:var(--coral)"><div class="xd mono"><span data-i18n="d3">Feb 2025 — May 2026</span></div>
-        <div><h3><span data-i18n="r3">Senior UX/UI Designer</span> <em>· Osolutions</em></h3><p data-i18n="p3">Owned end-to-end design of “Growth In”, a business-development and task-automation platform, and set the design direction across several web and mobile apps.</p>
+      <article class="xcard x5" style="--i:1"><div><div class="v">∞</div><div class="when" data-i18n="d2">2022 — Present</div><span class="xtag" data-i18n="branch">Side branch</span></div>
+        <div><h3><span data-i18n="r2">Freelance Product Designer</span><em data-i18n="remote">Remote</em></h3><p data-i18n="p2">Concepts, user flows, high-fidelity UI and prototypes for clients across industries, delivered as developer-ready Figma files and reusable components.</p></div></article>
+      <article class="xcard x2" style="--i:2"><div><div class="v">v4</div><div class="when" data-i18n="d3">Feb 2025 — May 2026</div></div>
+        <div><h3><span data-i18n="r3">Senior UX/UI Designer</span><em>Osolutions</em></h3><p data-i18n="p3">Owned end-to-end design of “Growth In”, a business-development and task-automation platform, and set the design direction across several web and mobile apps.</p>
         <ul><li data-i18n="t3a">Research &amp; personas</li><li data-i18n="t3b">Usability testing</li><li data-i18n="t3c">Design direction</li></ul></div></article>
-      <article class="xrow" style="--c:var(--violet)"><div class="xd mono"><span data-i18n="d4">Jan 2024 — Jan 2025</span></div>
-        <div><h3><span data-i18n="r4">UX/UI Designer</span> <em>· Tanfith Digital Solutions</em></h3><p data-i18n="p4">Web and mobile interfaces for Nahda Housing and the Aqarcom real-estate app, plus task-management and HR systems, across the full SDLC.</p>
+      <article class="xcard x3" style="--i:3"><div><div class="v">v3</div><div class="when" data-i18n="d4">Jan 2024 — Jan 2025</div></div>
+        <div><h3><span data-i18n="r4">UX/UI Designer</span><em>Tanfith Digital Solutions</em></h3><p data-i18n="p4">Web and mobile interfaces for Nahda Housing and the Aqarcom real-estate app, plus task-management and HR systems, across the full SDLC.</p>
         <ul><li>Aqarcom</li><li>Nahda Housing</li><li data-i18n="t4c">HR &amp; task systems</li></ul></div></article>
-      <article class="xrow" style="--c:var(--sun)"><div class="xd mono"><span data-i18n="d5">Feb 2023 — Feb 2024</span></div>
-        <div><h3><span data-i18n="r5">UX/UI Designer</span> <em>· XSolution</em></h3><p data-i18n="p5">Responsive, mobile-first designs for web and mobile platforms in Figma and Adobe XD.</p></div></article>
-      <article class="xrow" style="--c:#FF9EE0"><div class="xd mono"><span data-i18n="d6">2018 — 2022</span><b data-i18n="edu">Education</b></div>
-        <div><h3><span data-i18n="r6">B.Sc. Computer Science &amp; AI</span> <em data-i18n="helwan">· Helwan University</em></h3><p data-i18n="p6">GPA 3.24 (Very Good). Graduation project graded Excellent (A), a full-stack MVC Core system. Also built a 3D Mummy game and a 2D Alpha-Beta game in Unity.</p></div></article>
+      <article class="xcard x4" style="--i:4"><div><div class="v">v2</div><div class="when" data-i18n="d5">Feb 2023 — Feb 2024</div></div>
+        <div><h3><span data-i18n="r5">UX/UI Designer</span><em>XSolution</em></h3><p data-i18n="p5">Responsive, mobile-first designs for web and mobile platforms in Figma and Adobe XD.</p></div></article>
+      <article class="xcard x6" style="--i:5"><div><div class="v">v1</div><div class="when" data-i18n="d6">2018 — 2022 · Initial commit</div></div>
+        <div><h3><span data-i18n="r6">B.Sc. Computer Science &amp; AI</span><em data-i18n="helwan">Helwan University</em></h3><p data-i18n="p6">GPA 3.24 (Very Good). Graduation project graded Excellent (A), a full-stack MVC Core system. Also built a 3D Mummy game and a 2D Alpha-Beta game in Unity.</p></div></article>
     </div>
   </div>
 </section>
@@ -487,13 +482,13 @@ const AR={you:"أنت",logo:"آلاء حسن",nAbout:"عنّي",nWork:"أعما�
  about:"أنا آلاء، مصممة منتجات من القاهرة وخريجة <span class=\"hl\">علوم الحاسب والذكاء الاصطناعي</span>. بصمم <span class=\"hl v\">أنظمة تصميم</span> ولوحات تحكم وتطبيقات موبايل، أغلبها عربي أولاً وRTL. وبكتب HTML وCSS وReact، فاللي بسلّمه بيكون <span class=\"hl c\">جاهز للتنفيذ</span>.",
  s1:"سنين في تصميم المنتجات الرقمية",s2:"مشروع ودراسة حالة على بيهانس",s3:"فرق منتجات في مصر والسعودية",s4:"واجهات بلغتين، وRTL مظبوط",
  workEye:"أعمال مختارة",workT1:"فريمات",workT2:"بفتخر بيها",workP:"تطبيقات موبايل ومنصات وصفحات هبوط لعملاء في مصر والخليج. كل مشروع بيفتح دراسة الحالة كاملة على بيهانس.",hint:"كمّل سكرول",more:"المزيد على بيهانس",
- expEye:"الخبرات",expT1:"اشتغلت",expT2:"فين",cur:"● حالياً",branch:"دوام جزئي",edu:"التعليم",
+ expEye:"الخبرات — سجل الإصدارات",expT1:"كل وظيفة",expT2:"إصدار جديد",cur:"● الإصدار الحالي",branch:"فرع جانبي",
  d1:"مايو ٢٠٢٦ — الآن",r1:"مصممة منتجات",p1:"بقود إعادة التصميم الكاملة لمنصة نَسَم لإدارة الأساطيل والأصول في السعودية والخليج، على الويب والموبايل وبالعربي أولاً.",t1a:"هيكلة معلومات جديدة",t1b:"نظام تصميم نَسَم",t1c:"التقارير · لوحة التحكم · المشرف العام",
  d3:"فبراير ٢٠٢٥ — مايو ٢٠٢٦",r3:"مصممة UX/UI أولى",p3:"مسؤولة عن تصميم منصة «Growth In» لتطوير الأعمال وأتمتة المهام من الأول للآخر، وحددت الاتجاه التصميمي لعدة تطبيقات ويب وموبايل.",t3a:"أبحاث وشخصيات",t3b:"اختبارات الاستخدام",t3c:"قيادة التصميم",
  d4:"يناير ٢٠٢٤ — يناير ٢٠٢٥",r4:"مصممة UX/UI",p4:"واجهات ويب وموبايل لمشروع النهضة للإسكان وتطبيق عقاركم، وأنظمة مهام وموارد بشرية، عبر دورة التطوير كاملة.",t4c:"أنظمة HR ومهام",
  d5:"فبراير ٢٠٢٣ — فبراير ٢٠٢٤",r5:"مصممة UX/UI",p5:"تصاميم متجاوبة تبدأ بالموبايل لمنصات ويب وموبايل باستخدام فيجما وAdobe XD.",
- d2:"٢٠٢٢ — الآن",r2:"مصممة منتجات مستقلة",remote:"· عن بُعد",p2:"أفكار ورحلات مستخدم وواجهات عالية الدقة ونماذج تفاعلية لعملاء في مجالات مختلفة، بملفات فيجما جاهزة للمطورين ومكوّنات قابلة لإعادة الاستخدام.",
- d6:"٢٠١٨ — ٢٠٢٢",r6:"بكالوريوس علوم الحاسب والذكاء الاصطناعي",helwan:"· جامعة حلوان",p6:"تقدير جيد جداً (3.24). مشروع التخرج بامتياز، نظام متكامل بـ MVC Core. وكمان برمجت لعبة مومياء 3D ولعبة Alpha-Beta بـ Unity.",
+ d2:"٢٠٢٢ — الآن",r2:"مصممة منتجات مستقلة",remote:"عن بُعد",p2:"أفكار ورحلات مستخدم وواجهات عالية الدقة ونماذج تفاعلية لعملاء في مجالات مختلفة، بملفات فيجما جاهزة للمطورين ومكوّنات قابلة لإعادة الاستخدام.",
+ d6:"٢٠١٨ — ٢٠٢٢ · أول commit",r6:"بكالوريوس علوم الحاسب والذكاء الاصطناعي",helwan:"جامعة حلوان",p6:"تقدير جيد جداً (3.24). مشروع التخرج بامتياز، نظام متكامل بـ MVC Core. وكمان برمجت لعبة مومياء 3D ولعبة Alpha-Beta بـ Unity.",
  tbEye:"الأدوات — مكتبة المكوّنات",tbT1:"إيه اللي",tbT2:"في الشنطة",tb1:"أنظمة التصميم",tb2:"تجربة المستخدم والأبحاث",tb3:"الواجهات والنماذج",tb4:"الفرونت إند",tb5:"البيانات والباك إند",tb6:"اللغات",
  k1:"أبحاث المستخدم",k2:"الشخصيات",k3:"اختبارات الاستخدام",k4:"هيكلة المعلومات",k5:"وايرفريم",k6:"متجاوب",l1:"العربية · الأم",l2:"الإنجليزية · متوسط",l3:"الإيطالية · مبتدئ",
  ctEye:"تواصل",ct1:"يلا نعمل",ct2:"حاجة حلوة.",ctLead:"عندك منتج محتاج تجربة أوضح، أو نظام تصميم، أو تجربة عربية من الأساس؟ ابعتلي.",copy:"انسخ الإيميل",copied:"اتنسخ ✓",
@@ -714,8 +709,10 @@ function buildScroll(){
     } else {
       $$(".hcard").forEach(card=>gsap.from(card,{y:70,duration:1,ease:"expo.out",scrollTrigger:{trigger:card,start:"top 92%"}}));
     }
-    // experience rows
-    gsap.from(".xrow",{y:50,stagger:.08,duration:1,ease:"expo.out",scrollTrigger:{trigger:".xlist",start:"top 85%"}});
+    // experience stack
+    const cards=$$(".xcard");
+    cards.forEach((card,i)=>{ if(i===cards.length-1) return;
+      gsap.to(card,{scale:.9-(cards.length-i)*.005,filter:"brightness(.75)",ease:"none",scrollTrigger:{trigger:cards[i+1],start:"top bottom",end:"top 30%",scrub:true}}); });
     // toolbox rows slide
     gsap.from(".trow",{xPercent:root.dir==="rtl"?8:-8,stagger:.08,duration:1,ease:"expo.out",scrollTrigger:{trigger:".tools-list",start:"top 85%"}});
     // headings skew-in
